@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="https://icons8.com/icon/YRDGHOgmMvEm/biological-hazard" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <header>
+        <a href="../index.html"><i class="fa-solid fa-4x fa-biohazard"></i></a>
+        <h1>Registro de autos</h1>
+            <div>
+                <!-- <a class="btn bg-secondary-subtle border border-primary-subtle rounded-3 p-3 me-3" href="#">Finalizar</a> -->
+            </div>
+    </header>
+
+    <section class="d-flex justify-content-center align-items-center w-100">
+        <div class="mensaje"></div>
+        <form id="formulario" class="needs-validation" novalidate>
+            <fieldset>
+                <legend class="text-light fs-2">Datos del vehiculo a comprar</legend>
+                
+                <div class="mb-3">
+                    <label for="disabledTextInput0" class="form-label text-light fs-5">Marca del vehiculo</label>
+                    <input type="text" class="form-control" id="disabledTextInput0"  placeholder="Ingrese la marca del vehiculo" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="disabledTextInput1" class="form-label text-light fs-5">Modelo del vehiculo</label>
+                    <input type="text" class="form-control" id="disabledTextInput1"  placeholder="Ingrese el modelo del vehiculo" required>
+                </div>
+
+                <div class="mb-3 w-100 d-flex">
+                    <div class="d-flex flex-column w-25">
+                        <label for="disabledSelect0" class="form-label text-light fs-5">Año</label>
+                        <select id="disabledSelect0" class="form-select" required>
+                            <option value="" disabled selected hidden>Selecciones el año</option>
+                        </select>
+                    </div>
+                    <div class="d-flex flex-column w-25 ps-3">
+                        <label for="disabledSelect1" class="form-label text-light fs-5">Precio</label>
+                        <select id="disabledSelect1" class="form-select" required>
+                            <option value="" disabled selected hidden>Seleccione el precio</option>
+                        </select>
+                    </div>
+                    <div class="d-flex flex-column w-25 ps-3">
+                        <label for="disabledSelect2" class="form-label text-light fs-5">Motor</label>
+                        <select id="disabledSelect2" class="form-select" required>
+                            <option value="" disabled selected hidden>Seleccione el motor</option>
+                        </select>
+                    </div>
+                    <div class="d-flex flex-column w-25 ps-3">
+                        <label for="disabledSelect3" class="form-label text-light fs-5">Transmision</label>
+                        <select id="disabledSelect3" class="form-select" required>
+                            <option value="" disabled selected hidden>Seleccione la transmision</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit" class="btn btn-primary w-100">Registrar</button>
+                    <button type="submit" class="btn btn-danger w-100 mt-2" id="limpieza">Limpiar todo</button>
+                </div>
+            </fieldset>
+        </form>
+    </section>
+
+    <section class="d-flex justify-content-center align-items-center w-100">
+        <h3 class="mt-5 text-light">Usted ha añadido lo siguiente</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr class="text-light ">
+                    <td scope="col"></td>
+                    <td scope="col">Marca</td>
+                    <td scope="col">Modelo</td>
+                    <td scope="col">Año</td>
+                    <td scope="col">Precio</td>
+                    <td scope="col">Motor</td>
+                    <td scope="col">Transmision</td>
+                </tr>
+            </thead>
+            <tbody id="autosTableBody" class="text-light">
+                
+            </tbody>
+        </table>
+    </section>
+
+    <script src="../class/carro.js"></script>
+    <script src="../class/year.js"></script>
+    <script src="../class/precio.js"></script>
+    <script src="../class/motor.js"></script>
+    <script src="../class/transmision.js"></script>
+    <script src="../scripts/main.js"></script>
+    <script src="../scripts/res.js"></script>
+</body>
+</html>
