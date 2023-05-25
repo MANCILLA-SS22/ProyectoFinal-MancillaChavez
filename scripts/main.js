@@ -2,6 +2,7 @@ let listaAnios = document.getElementById("disabledSelect0");
 let listaPrecios = document.getElementById("disabledSelect1");
 let listaMotores = document.getElementById("disabledSelect2");
 let listaTransmision = document.getElementById("disabledSelect3");
+let bodyTable = document.getElementById("autosTableBody");
 let limpieza = document.getElementById("limpieza");
 const formulario = document.getElementById("formulario");
 
@@ -13,24 +14,22 @@ pedirTransmision();
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 let array_carros = [];
-let carrosJSON = [];
+
+if (localStorage.getItem("array_carros")) {
+    let carrosJSON = [];
+    carrosJSON = JSON.parse(localStorage.getItem("array_carros"));
+    array_carros = carrosJSON.map((element) => new Carro(element.marca, element.modelo, element.anio, element.precio, element.motor, element.transmision));
+    imprimirTabla(array_carros);
+}
 
 limpieza.addEventListener("click", limpiarTodo);
 
 formulario.addEventListener("submit", (event) => {
     event.preventDefault();
     event.target.setAttribute("class", "needs-validation"); 
-
     let resultado = crearAuto();
-
     return resultado;
 });
-
-if (localStorage.getItem("array_carros")) {
-    carrosJSON = JSON.parse(localStorage.getItem("array_carros"));
-    array_carros = carrosJSON.map((element) => new Carro(element.marca, element.modelo, element.anio, element.precio, element.motor, element.transmision));
-    imprimirTabla(array_carros);
-}
 
 function crearAuto() {
     const nombreVehiculo = document.getElementById("disabledTextInput0").value;
@@ -50,8 +49,7 @@ function crearAuto() {
     return true;
 } 
 
-function imprimirTabla(arreglo = []){
-    let bodyTable = document.getElementById("autosTableBody");
+function imprimirTabla(array_carros = []){
     bodyTable.innerHTML = "";
     array_carros.forEach((evento) => {
     let tabla = document.createElement("tr");
@@ -64,8 +62,20 @@ function imprimirTabla(arreglo = []){
             <td class="text-light">${evento.motor}</td>
             <td class="text-light">${evento.transmision}</td>
         </th>`;
-    bodyTable.append(tabla);
+
+        const botonBorrar = document.createElement("button");
+        botonBorrar.innerText = "Borrar";
+        botonBorrar.addEventListener("click", () => {eliminarAuto(evento)})
+        tabla.appendChild(botonBorrar);
+        bodyTable.appendChild(tabla);
     });
+}
+
+function eliminarAuto(auto) {
+    let arregloAutosJSON = JSON.parse(localStorage.getItem("array_carros")); //console.log(arregloAutosJSON);
+    let nuevoArray = arregloAutosJSON.filter(item => item.marca != auto.marca); console.log(nuevoArray);
+    localStorage.setItem("array_carros", JSON.stringify(nuevoArray));
+    imprimirTabla(nuevoArray);
 }
 
 function limpiar(){
@@ -78,13 +88,13 @@ function limpiar(){
 }
 
 function limpiarTodo(){
-    array_carros = [];
-    localStorage.clear();
+    array_carros = []
+    imprimirTabla();
 }
 
 async function pedirAnios(){
-    const respuesta = await fetch("../data/year.json"); console.log(respuesta);
-    const data = await respuesta.json();  console.log(data);
+    const respuesta = await fetch("../data/year.json"); //console.log(respuesta);
+    const data = await respuesta.json();  //console.log(data);
 
     //Creacion de listas para el tag select, dirigido al anio del vehiculo
     data.forEach((e) => {
@@ -95,8 +105,8 @@ async function pedirAnios(){
 };
 
 async function pedirPrecio(){
-    const respuesta = await fetch("../data/price.json"); console.log(respuesta);
-    const data = await respuesta.json();  console.log(data);
+    const respuesta = await fetch("../data/price.json"); //console.log(respuesta);
+    const data = await respuesta.json();  //console.log(data);
 
     //Creacion de listas para el tag select, dirigido al anio del vehiculo
     data.forEach((e) => {
@@ -107,8 +117,8 @@ async function pedirPrecio(){
 };
 
 async function pedirMotor(){
-    const respuesta = await fetch("../data/motor.json"); console.log(respuesta);
-    const data = await respuesta.json();  console.log(data);
+    const respuesta = await fetch("../data/motor.json"); //console.log(respuesta);
+    const data = await respuesta.json();  //console.log(data);
 
     //Creacion de listas para el tag select, dirigido al tipo de motor del vehiculo
     data.forEach((e) => {
@@ -119,8 +129,8 @@ async function pedirMotor(){
 };
 
 async function pedirTransmision(){
-    const respuesta = await fetch("../data/transmision.json"); console.log(respuesta);
-    const data = await respuesta.json();  console.log(data);
+    const respuesta = await fetch("../data/transmision.json"); //console.log(respuesta);
+    const data = await respuesta.json();  //console.log(data);
 
     //Creacion de listas para el tag select, dirigido al tipo de transmision del vehiculo
     data.forEach((e) => {
