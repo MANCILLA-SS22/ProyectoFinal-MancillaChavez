@@ -145,123 +145,62 @@ function limpiarTodo(){
     })
 }
 
+function crearAuto(){
 
-/* function crearAuto() {
+    let nombreVehiculo = document.getElementById("disabledTextInput0").value;
+    let modeloVehiculo = document.getElementById("disabledTextInput1").value;
+    let anoVehiculo = document.getElementById("disabledSelect0").value;
+    let precioVehiculo = document.getElementById("disabledSelect1").value;
+    let motorVehiculo = document.getElementById("disabledSelect2").value;
+    let transmisionVehiculo = document.getElementById("disabledSelect3").value;
 
-    // Buscamos el tipo de documento seleccionado y evaluamos si existe o no
-    let unVehiculo = buscarVerificacion(nombreVehiculo.value, modeloVehiculo.value, anoVehiculo.value, precioVehiculo.value, motorVehiculo.value, transmisionVehiculo.value)
-    if(!unVehiculo){
-        let modeloRepetigo = existeModelo(modeloVehiculo.value)
-        if (modeloRepetigo) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Modelo ya registrado',
-                text: 'Por favor pruebe con otro modelo',
-                footer: '<a href="">Why do I have this issue?</a>'
-            })
-        }
+    let validar = validarRegistro(nombreVehiculo, modeloVehiculo, anoVehiculo, precioVehiculo, motorVehiculo, transmisionVehiculo)
+    if (validar == true){
+        return
     }
-        unVehiculo = new Carro(nombreVehiculo.value, modeloVehiculo.value, anoVehiculo.value, precioVehiculo.value, motorVehiculo.value, transmisionVehiculo.value);
-        array_carros.push(unVehiculo);
-
-        localStorage.setItem("array_carros", JSON.stringify(array_carros));// Almacenar en el local storage todas las carreras
-        imprimirTabla(array_carros);
-        limpiar();
-        //return true;
-    
-    /* else{
-        Swal.fire({
-            title: 'Error al registrar',
-            text: 'Favor de escribir los datos faltantes',
-            icon: 'error',
-            confirmButtonText: 'Continuar'
-        });
-        return false;
-    } 
-
-
-    imprimirTabla(array_carros);
-    return true;
-}*/
-
-/* function crearAuto() {
-
-    const nombreVehiculo = document.getElementById("disabledTextInput0").value;
-    const modeloVehiculo = document.getElementById("disabledTextInput1").value;
-    const anoVehiculo = document.getElementById("disabledSelect0").value;
-    const precioVehiculo = document.getElementById("disabledSelect1").value;
-    const motorVehiculo = document.getElementById("disabledSelect2").value;
-    const transmisionVehiculo = document.getElementById("disabledSelect3").value;    
-    
     // Buscamos el tipo de documento seleccionado y evaluamos si existe o no
     let unVehiculo = buscarVerificacion(nombreVehiculo, modeloVehiculo, anoVehiculo, precioVehiculo, motorVehiculo, transmisionVehiculo)
+    let modeloRepetido = existeModelo(modeloVehiculo)
     if (!unVehiculo) {
+        if (modeloRepetido) {
+        Swal.fire({ icon: 'error', title: 'Modelo ya registrado', text: 'Por favor pruebe con otro modelo', footer: '<a href="">Why do I have this issue?</a>' })
+        return false;
+    }else{
         unVehiculo = new Carro(nombreVehiculo, modeloVehiculo, anoVehiculo, precioVehiculo, motorVehiculo, transmisionVehiculo);
         array_carros.push(unVehiculo);
 
         localStorage.setItem("array_carros", JSON.stringify(array_carros));// Almacenar en el local storage todas las carreras
         imprimirTabla(array_carros);
         limpiar();
-    } else{
-        Swal.fire({title: 'Error al registrar',text: 'Favor de escribir los datos faltantes',icon: 'error',confirmButtonText: 'Continuar'});
+    }
+    }else {
+        Swal.fire({ title: 'Error al registrar', text: 'Favor de escribir los datos faltantes', icon: 'error', confirmButtonText: 'Continuar' });
         return false;
     }
 
-    
-    let modeloRepetigo = existeModelo(modeloVehiculo.value)
-    if (!modeloRepetigo) {
-        Swal.fire({icon: 'error',title: 'Modelo ya registrado',text: 'Por favor pruebe con otro modelo',footer: '<a href="">Why do I have this issue?</a>'})
-        return false;
-    }
 
     imprimirTabla(array_carros);
     return true;
-} */
+}
 
-/* function crearAuto() {
-
-    const nombreVehiculo = document.getElementById("disabledTextInput0");
-    const modeloVehiculo = document.getElementById("disabledTextInput1");
-    const anoVehiculo = document.getElementById("disabledSelect0");
-    const precioVehiculo = document.getElementById("disabledSelect1");
-    const motorVehiculo = document.getElementById("disabledSelect2");
-    const transmisionVehiculo = document.getElementById("disabledSelect3");    
-    
-    // Buscamos el tipo de documento seleccionado y evaluamos si existe o no
-    
-    // let unVehiculo = buscarVerificacion(modeloVehiculo.value)
-    // if (!unVehiculo) {
-    //     Swal.fire({title: 'Error al registrar',text: 'Favor de escribir los datos faltantes',icon: 'error',confirmButtonText: 'Continuar'});
-    //     return false;
-    // }
-
-    let modeloRepetigo = existeModelo(unVehiculo)
-    if (!modeloRepetigo){
-        unVehiculo = new Carro(nombreVehiculo.value, modeloVehiculo.value, anoVehiculo.value, precioVehiculo.value, motorVehiculo.value, transmisionVehiculo.value);
-        array_carros.push(unVehiculo);
-        localStorage.setItem("array_carros", JSON.stringify(array_carros));// Almacenar en el local storage todas las carreras
-        imprimirTabla(array_carros);
-        limpiar();
-        //return true;
-    }else{
-        Swal.fire({icon: 'error',title: 'Modelo ya registrado',text: 'Por favor pruebe con otro modelo',footer: '<a href="">Why do I have this issue?</a>'})
-        return false;
+function validarRegistro(nombre, modelo, ano, precio, motor, transmision) {
+    if (nombre.length == 0 || modelo.length == 0 || ano == "" || precio == "" || motor == "" ||transmision == ""){
+        Swal.fire({ title: 'Error al registrar', text: 'Favor de escribir los datos faltantes', icon: 'error', confirmButtonText: 'Continuar' });
+        return true;
     }
+}
 
-    imprimirTabla(array_carros);
-    return true;
-} */
-
-function buscarVerificacion(b){
-    let res = array_carros.find((unCarro) => unCarro.modelo === b);
+function buscarVerificacion(a,b,c,d,e,f){
+    let res = array_carros.find((unCarro) => (unCarro.marca === a && unCarro.modelo === b && unCarro.anio === c && unCarro.precio === d && unCarro.motor === e && unCarro.transmision === f));
     return res;
 }
 
 function existeModelo(dato) {
+    console.log(dato);
     let res = array_carros.some((evento) => evento.modelo === dato);
+    console.log(res);
     return res;
 }
-
 
 
 
