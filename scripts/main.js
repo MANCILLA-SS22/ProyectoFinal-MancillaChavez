@@ -158,22 +158,22 @@ function crearAuto(){
     if (validar == true){
         return
     }
-    // Buscamos el tipo de documento seleccionado y evaluamos si existe o no
+
     let unVehiculo = buscarVerificacion(nombreVehiculo, modeloVehiculo, anoVehiculo, precioVehiculo, motorVehiculo, transmisionVehiculo)
     let modeloRepetido = existeModelo(modeloVehiculo)
-    if (!unVehiculo) {
-        if (modeloRepetido) {
-        Swal.fire({ icon: 'error', title: 'Modelo ya registrado', text: 'Por favor pruebe con otro modelo', footer: '<a href="">Why do I have this issue?</a>' })
-        return false;
+    if (!unVehiculo){ //Verificamos que el usuario no deje espacios en blanco
+        if (modeloRepetido){ //Verificamos que unicamente el MODELO no sea repetido
+            Swal.fire({ icon: 'error', title: 'Modelo ya registrado', text: 'Por favor pruebe con otro modelo', footer: '<a href="">Why do I have this issue?</a>' })
+            return false;
+        }else{
+            unVehiculo = new Carro(nombreVehiculo, modeloVehiculo, anoVehiculo, precioVehiculo, motorVehiculo, transmisionVehiculo);
+            array_carros.push(unVehiculo);
+    
+            localStorage.setItem("array_carros", JSON.stringify(array_carros));// Almacenar en el local storage todas las carreras
+            imprimirTabla(array_carros);
+            limpiar();
+        }
     }else{
-        unVehiculo = new Carro(nombreVehiculo, modeloVehiculo, anoVehiculo, precioVehiculo, motorVehiculo, transmisionVehiculo);
-        array_carros.push(unVehiculo);
-
-        localStorage.setItem("array_carros", JSON.stringify(array_carros));// Almacenar en el local storage todas las carreras
-        imprimirTabla(array_carros);
-        limpiar();
-    }
-    }else {
         Swal.fire({ title: 'Error al registrar', text: 'Favor de escribir los datos faltantes', icon: 'error', confirmButtonText: 'Continuar' });
         return false;
     }
@@ -228,7 +228,7 @@ if (localStorage.getItem("array_carros")) {
 
 formulario.addEventListener("submit", (event) => {
     event.preventDefault();
-    //event.target.setAttribute("class", "needs-validation");
+    event.target.setAttribute("class", "needs-validation");
 
     let resultado = crearAuto();
     if (resultado) {
