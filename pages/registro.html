@@ -7,7 +7,7 @@
 
     <link rel="icon" href="https://icons8.com/icon/YRDGHOgmMvEm/biological-hazard" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
@@ -67,8 +67,8 @@
                 </div>
 
                 <div>
-                    <button type="submit" class="btn btn-primary w-100">Registrar</button>
-                    <button type="submit" class="btn btn-danger w-100 mt-2" id="limpieza">Limpiar todo</button>
+                    <button type="submit" class="btn btn-primary w-100" id="registro">Registrar</button>
+                    <button type="reset"  class="btn btn-danger w-100 mt-2" id="limpieza">Limpiar todo</button>
                 </div>
             </fieldset>
         </form>
@@ -79,18 +79,16 @@
         <table class="table table-striped">
             <thead>
                 <tr class="text-light ">
-                    <td scope="col"></td>
-                    <td scope="col">Marca</td>
-                    <td scope="col">Modelo</td>
-                    <td scope="col">Año</td>
-                    <td scope="col">Precio</td>
-                    <td scope="col">Motor</td>
-                    <td scope="col">Transmision</td>
+                    <th scope="col"></th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Modelo</th>
+                    <th scope="col">Año</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Motor</th>
+                    <th scope="col">Transmision</th>
                 </tr>
             </thead>
-            <tbody id="autosTableBody" class="text-light">
-                
-            </tbody>
+            <tbody id="autosTableBody" class="text-light"></tbody>
         </table>
     </section>
 
@@ -100,5 +98,7 @@
     <script src="../class/motor.js"></script>
     <script src="../class/transmision.js"></script>
     <script src="../scripts/main.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
